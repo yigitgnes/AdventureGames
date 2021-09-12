@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
 public class Player {
-
+    private int block;
     private int damage;
     private int health;
+    private int originalHealt;
     private int money;
     private String playerName;
     private String name;
@@ -47,24 +48,27 @@ public class Player {
                 +this.getMoney());*/
     }
 
-    public void printInfo(){
+    public void printInfo() {
         System.out.println(
-                "Silahınız: "+this.getInventory().getWeapon().getName()
-                +"\tHasar: "
-                + this.getDamage()
-                +"\tSağlık: "
-                +this.getHealth()
-                +"\tPara: "
-                +this.getMoney());
+                "Silahınız: " + this.getInventory().getWeapon().getName()
+                        + "\tZırhınız: " + this.getInventory().getArmor().getName()
+                        + "\tHasar: " + this.getTotalDamage()
+                        + "\tEngelleme: " + this.getInventory().getArmor().getBlock()
+                        + "\tSağlık: " + this.getHealth()
+                        + "\tPara: " + this.getMoney());
     }
 
     public void innitPLayer(GameChar gameChar) {
         this.setDamage(gameChar.getDamage());
         this.setHealth(gameChar.getHealth());
+        this.setOriginalHealt(gameChar.getHealth());
         this.setMoney(gameChar.getMoney());
         this.setPlayerName(gameChar.getName());
+        this.setBlock(gameChar.getBlock());
     }
-
+    public int getTotalDamage (){
+        return damage + this.getInventory().getWeapon().getDamage();
+    }
     public int getDamage() {
         return damage + this.getInventory().getWeapon().getDamage();
     }
@@ -111,5 +115,21 @@ public class Player {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public int getBlock() {
+        return block ;
+    }
+
+    public void setBlock(int block) {
+        this.block = block;
+    }
+
+    public int getOriginalHealt() {
+        return originalHealt;
+    }
+
+    public void setOriginalHealt(int originalHealt) {
+        this.originalHealt = originalHealt;
     }
 }
